@@ -1,73 +1,80 @@
-/*⚠️ NO MODIFIQUES EL NOMBRE DE LAS DECLARACIONES ⚠️*/
+/* 
+  Importante: 
+  No modificar ni el nombre ni los argumetos que reciben las funciones, sÃ³lo deben escribir
+  cÃ³digo dentro de las funciones ya definidas. 
+  No comentar la funcion 
+*/
+function ingredienteEnMalEstado(menu = {}, comida = '', ingrediente = '') {
+  // El ingrediente de cierta comida está en mal estado. Hay que sacar los ingredientes próximos a éste,
+  // ya que deben estar contaminados también.
+  // La funcion recibe un objeto "menu" que contiene las comidas del día. "comida" es un array de ingredientes.
+  // Si "ingrediente" está en el array, devolver un array con el ingrediente y los elementos en un índice de
+  // diferencia.
+  // Ej:
+  /* let menuDelDia = {
+      raviolesConSalsa: ["Harina", "Sal", "Huevos", "Aceite", "Peceto", "Ricota"],
+      bagnaCauda: ["Ajo", "Anchoas", "Aceite", "Crema", "Papas", "Zanahorias"],
+      tallarines: ["Harina", "Pollo", "Aceite", "Huevos", "Tomates", "Cebolla"]
+  } */
+  // ingredienteEnMalEstado(menuDelDia, "raviolesConSalsa", "Peceto") devuelve => ["Aceite", "Peceto", "Ricota"];
+  // ingredienteEnMalEstado(menuDelDia, "tallarines", "Aceite") devuelve => ["Pollo", "Aceite", "Huevos"];
+  // En caso de no encontrarse el ingrediente en la comida, devolver "El menú está perfecto".
+  // NOTA: No utilizar el método "includes".
+  //
+  // Tu código:
+  //buscaremos si la comida tiene el ingrediente malogrado
+  let hayIngredienteMalogrado = false
+  for (let ing of menu[comida]) {
+    if (ing === ingrediente) {
+      hayIngredienteMalogrado = true
+    }
+  }
+  if (hayIngredienteMalogrado) {
+    //ejecutar la logica para el ingrediente malogrado
 
-function deObjetoAarray(objeto) {
-   // Recibes un objeto. Tendrás que crear un arreglo de arreglos.
-   // Cada elemento del arreglo padre será un nuevo arreglo que contendrá dos elementos.
-   // Estos elementos debe ser cada par clave:valor del objeto recibido.
-   // [EJEMPLO]: {D: 1, B: 2, C: 3} ---> [['D', 1], ['B', 2], ['C', 3]].
-   // Tu código:
+    //en que indice esta el ingrediente malogrado
+    let indiceMalogrado
+    for (let i = 0; i < menu[comida].length; i++) {
+      if (menu[comida][i] === ingrediente) {
+        indiceMalogrado = i
+      }
+    }
+
+    //devolver los ingredientes malogrados, tenemos 3 casos
+    // al inicio, al medio, y al final
+    if (indiceMalogrado === 0) {
+      //al inicio
+      return [menu[comida][0], menu[comida][1]]
+    } else if (indiceMalogrado === menu[comida].length - 1) {
+      //al final
+      return [
+        menu[comida][menu[comida].length - 2],
+        menu[comida][menu[comida].length - 1],
+      ]
+    } else {
+      //en el medio
+      return [
+        menu[comida][indiceMalogrado - 1],
+        menu[comida][indiceMalogrado],
+        menu[comida][indiceMalogrado + 1],
+      ]
+    }
+  } else {
+    //si no hay ingrediente malogrado
+    return 'El menú está pefecto'
+  }
 }
-
-function numberOfCharacters(string) {
-   // La función recibe un string. Debes recorrerlo y retornar un objeto donde cada propiedad es una de las
-   // letras del string, y su valor es la cantidad de veces que se repite en el string.
-   // Las letras deben estar en orden alfabético.
-   // [EJEMPLO]: "adsjfdsfsfjsdjfhacabcsbajda" ---> { a: 5, b: 2, c: 2, d: 4, f: 4, h:1, j: 4, s: 5 }
-   // Tu código:
+let menuDelDia = {
+  raviolesConSalsa: ['Harina', 'Sal', 'Huevos', 'Aceite', 'Peceto', 'Ricota'],
+  bagnaCauda: ['Ajo', 'Anchoas', 'Aceite', 'Crema', 'Papas', 'Zanahorias'],
+  tallarines: ['Harina', 'Pollo', 'Aceite', 'Huevos', 'Tomates', 'Cebolla'],
 }
+console.log('Peceto')
+console.log(ingredienteEnMalEstado(menuDelDia, 'raviolesConSalsa', 'Peceto'))
+console.log('Aceite')
+console.log(ingredienteEnMalEstado(menuDelDia, 'tallarines', 'Aceite'))
+console.log('Pinia')
+console.log(ingredienteEnMalEstado(menuDelDia, 'tallarines', 'Pinia'))
+// No modifiques nada debajo de esta linea //
 
-function capToFront(string) {
-   // Recibes un string con algunas letras en mayúscula y otras en minúscula.
-   // Debes enviar todas las letras en mayúscula al comienzo del string.
-   // Retornar el string.
-   // [EJEMPLO]: soyHENRY ---> HENRYsoy
-   // Tu código:
-}
-
-function asAmirror(frase) {
-   // Recibes una frase. Tu tarea es retornar un nuevo string en el que el orden de las palabras sea el mismo.
-   // La diferencia es que cada palabra estará escrita al inverso.
-   // [EJEMPLO]: "The Henry Challenge is close!"  ---> "ehT yrneH egnellahC si !esolc"
-   // Tu código:
-}
-
-function capicua(numero) {
-   // Si el número que recibes es capicúa debes retornar el string: "Es capicua".
-   // Caso contrario: "No es capicua".
-   // Tu código:
-}
-
-function deleteAbc(string) {
-   // Tu tarea es eliminar las letras "a", "b" y "c" del string recibido.
-   // Retorna el string sin estas letras.
-   // Tu código:
-}
-
-function sortArray(arrayOfStrings) {
-   // Recibes un arreglo de strings.
-   // Debe retornar un nuevo arreglo, pero con las palabras ordenadas en orden creciente a partir
-   // de la longitud de cada string.
-   // [EJEMPLO]: ["You", "are", "beautiful", "looking"]  ---> [“You", "are", "looking", "beautiful"]
-   // Tu código:
-}
-
-function buscoInterseccion(array1, array2) {
-   // Recibes dos arreglos de números.
-   // Debes retornar un nuevo arreglo en el que se guarden los elementos en común entre ambos arreglos.
-   // [EJEMPLO]: [4,2,3] U [1,3,4] = [3,4].
-   // Si no tienen elementos en común, retornar un arreglo vacío.
-   // [PISTA]: los arreglos no necesariamente tienen la misma longitud.
-   // Tu código:
-}
-
-/*⚠️ NO MODIFIQUES NADA DEBAJO DE ESTO ⚠️*/
-module.exports = {
-   deObjetoAarray,
-   numberOfCharacters,
-   capToFront,
-   asAmirror,
-   capicua,
-   deleteAbc,
-   sortArray,
-   buscoInterseccion,
-};
+module.exports = ingredienteEnMalEstado
